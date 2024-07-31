@@ -166,23 +166,23 @@ binary_sensor:
       number: 0
       inverted: true
 
-  - platform: gpio
-    name: "S3 SDA"
-    pin: 
-      number: 39
-      inverted: true
-      mode:
-        input: true
-        pullup: true
+#  - platform: gpio
+#    name: "S3 SDA"
+#    pin: 
+#      number: 39
+#      inverted: true
+#      mode:
+#        input: true
+#        pullup: true
 
-  - platform: gpio
-    name: "S3 SCL"
-    pin: 
-      number: 38
-      inverted: true
-      mode:
-        input: true
-        pullup: true
+#  - platform: gpio
+#    name: "S3 SCL"
+#    pin: 
+#      number: 38
+#      inverted: true
+#      mode:
+#        input: true
+#        pullup: true
 
   - platform: gpio
     name: "S3 IO10"
