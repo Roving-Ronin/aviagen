@@ -100,7 +100,7 @@ web_server:
    # TCP Port the webserver operates upon
   port: 80
    # Webserver version (default is 2).
-#  version: 3
+  version: 3
    # Require BASIC authentication to access local webserver
 #  auth:
 #    username: jacomms # !secret web_server_username
