@@ -132,11 +132,12 @@ select:
   - platform: template
     name: "Location"
     options:
-      - ""
+      - "Undefined"
       - "Tirrannaville"
       - "Goulburn"
       - "Bowral"
       - "Wagga Wagga"
+    initial_option: "Undefined"
     id: location_select
     restore_value: true  # This ensures the selected value is persisted across reboots
     entity_category: diagnostic
