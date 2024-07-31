@@ -1,32 +1,43 @@
 #########################################################################
 #
 # Kincony S3 Core Board - Settings
+# See: https://www.kincony.com/kincony-esp32-s3-core-board.html
 #
+
+#########################################################################
+#
+# Substitutions
+#
+
+   # I2C PINS - Used for BME280 sensor Bus A
+  bus_a_sda_pin: "GPIO38"
+  bus_a_scl_pin: "GPIO39"
+  bus_a_frequency: "100kHz"    # Optional: 100kHz
+
+#########################################################################
+#
+# ESP Device Settings
+#
+
 esp32:
   flash_size: 16MB
 
-sensor:
-
-   # ESP32 Internal Temperature
-  - platform: internal_temperature
-    name: "Device Temperature"
-
-
-
 esphome:
-  name: s3
-  friendly_name: s3
   platformio_options:
     board_build.flash_mode: dio
 
 esp32:
   board: esp32-s3-devkitc-1
   framework:
-    type: esp-idf
+    type: arduino
+#    type: esp-idf
+    version: recommended
+  flash_size: 16MB
 
-# Enable logging
-logger: 
-  hardware_uart: USB_SERIAL_JTAG
+##########################################################################
+#
+# Ethernet Device - Type W5500
+#
 
 ethernet:
   type: W5500
@@ -37,7 +48,13 @@ ethernet:
   interrupt_pin: GPIO2
   reset_pin: GPIO1
 
+##########################################################################
+#
+# UARTS
+#
+
 uart:
+   # RS485 CAN / Modbus Initialize
   - id: uart_485
     baud_rate: 9600
     debug:
@@ -48,28 +65,52 @@ uart:
     tx_pin: 16
     rx_pin: 15
 
-  - id: uart_sim7600
-    baud_rate: 115200
-    debug:
-      direction: BOTH
-      dummy_receiver: true
-      after:
-        timeout: 10ms
-      sequence:
-        - lambda: UARTDebug::log_string(direction, bytes);
-    tx_pin: 18
-    rx_pin: 17
+   # 4G Mobile Module Initialize
+#  - id: uart_sim7600
+#    baud_rate: 115200
+#    debug:
+#      direction: BOTH
+#      dummy_receiver: true
+#      after:
+#        timeout: 10ms
+#      sequence:
+#        - lambda: UARTDebug::log_string(direction, bytes);
+#    tx_pin: 18
+#    rx_pin: 17
+
+##########################################################################
+#
+# Switches
+#
 
 switch:
+   # RS485 UART
   - platform: uart
     uart_id: uart_485
     name: "RS485 Button"
     data: [0x11, 0x22, 0x33, 0x44, 0x55]
 
-  - platform: uart
-    uart_id: uart_sim7600
-    name: "UART 4G"
-    data: "AT+CGSN\r\n" # read 4G SIM7600 ID
+   # 4G Mobile Module UART
+#  - platform: uart
+#    uart_id: uart_sim7600
+#    name: "UART 4G"
+#    data: "AT+CGSN\r\n" # read 4G SIM7600 ID
+
+##########################################################################
+#
+# Sensors
+#
+
+sensor:
+
+   # ESP32 Internal Temperature
+  - platform: internal_temperature
+    name: "Device Temperature"
+
+##########################################################################
+#
+# Binary Sensors
+#
 
 binary_sensor:
 
