@@ -42,7 +42,7 @@ esp32:
   framework:
     type: arduino
 #    type: esp-idf
-    version: recommended
+    version: latest
   flash_size: 16MB
 
 ##########################################################################
