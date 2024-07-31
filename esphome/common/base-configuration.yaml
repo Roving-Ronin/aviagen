@@ -4,28 +4,58 @@
 #
 
 substitutions:
-   # Allows ESP device to be automatically lined to an 'Area' in Home Assistant. Typically used for areas such as 'Lounge Room', 'Kitchen' etc  
+
+##########################
+# Location/Site Details:
+#
+   # The Aviagen site location, upon which this device is deployed. Used to populate a Text Sensor with this information.
+  site: "Tirrannaville"
+   # Allows ESP device to be automatically lined to an 'Area' in Home Assistant. Typically used for areas such as 'Front Gate, Decontamination, Shed #  etc  
   location: ""
-   # The phase in the home power supply, upon which this device is utilsed. 1p = A. 3p = A, B or C.  (myHome GPO 1 = Phase C, GPO 2 = Phase A, GPO 3 = Phase B)  
-  power_circuit: "TBA"  
-   # Set the update interval for sensors
-  sensor_update_interval: 10s   
-   # Define a domain for this device to use. i.e. iot.home.lan (so device will appear as athom-smart-plug-v2.iot.home.lan in DNS/DHCP logs)
-  dns_domain: ".iot.home.lan"
+   # The phase in the locations power supply, upon which this device is utilsed. 1p = A. 3p = A, B or C.  (GPO 1 = Phase A, GPO 2 = Phase B, GPO 3 = Phase C).
+   # Used to populate a Text Sensor with this information, that may be used to loadshed in future, or trace outages to electrical faults.
+  power_circuit: "TBA"
+   # Asset Tag Details:
+  asset_id: ""
+
+##########################
+# Time Update Settings:
+#
    # Set timezone of the smart plug. Useful if the plug is in a location different to the HA server. Can be entered in unix Country/Area format (i.e. "Australia/Sydney")
   timezone: "Australia/Sydney"
-   # Set the duration between the sntp service polling ntp.org servers for an update
+   # Set the duration between the sntp service polling pool.ntp.org servers for updates
   sntp_update_interval: 6h
    # Network time servers for your region, enter from lowest to highest priority
   sntp_server_1: "0.au.pool.ntp.org"
   sntp_server_2: "1.au.pool.ntp.org"
   sntp_server_3: "2.au.pool.ntp.org"
-   # Enables faster network connections, with last connected SSID being connected to and no full scan for SSID being undertaken   
+
+##########################
+# Network Settings
+#
+   # Enables faster network connections, with last connected SSID being connected to and no full scan for SSID being undertaken
   wifi_fast_connect: "true"
-   # Define logging level: NONE, ERROR, WARN, INFO, DEBUG (Default), VERBOSE, VERY_VERBOSE
-  log_level: "INFO"
    # Enable or disable the use of IPv6 networking on the device
   ipv6_enable: "false"
+   # Network - Static IP - Address
+  network_ip: ""
+   # Network - Static IP - Gateway
+  network_gateway: ""
+   # Network - Static IP - Subnet Mask
+  network_subnet: ""
+   # Network - Static IP - DNS Servers
+  dns_server1: ""
+  dns_server2: ""
+   # Define a domain for this device to use. i.e. iot.home.lan (so device will appear as athom-smart-plug-v2.iot.home.lan in DNS/DHCP logs)
+  dns_domain: ""
+
+##########################
+# Device Settings:
+#  
+   # Set the update interval for sensors  
+  sensor_update_interval: 10s   
+   # Define logging level: NONE, ERROR, WARN, INFO, DEBUG (Default), VERBOSE, VERY_VERBOSE
+  log_level: "INFO"
  
 
 #########################################################################
@@ -45,7 +75,7 @@ esphome:
 #########################################################################
 
 preferences:
-   # Enable to allow storing of 'Read Total' between reboots and flashing.
+   # Enable to allow storing of 'Read Total' between reboots and flashing. Only used be ESP82xx devices
   flash_write_interval: 5min
 
 api:
@@ -74,13 +104,32 @@ network:
 #
 
 # dashboard_import:
-#  package_import_url: github://roving-ronin/myhomeassistant/esphome/common/base-configuration.yaml@main
+#  package_import_url: github://roving-ronin/aviagen/esphome/common/base-configuration.yaml@main
 #  import_full_config: false
 
 #packages:
 #  device_base: !include common/base-configuration-wifi.yaml
 #  device_version: !include common/everything-presence-one-sen0395-stable.yaml
 #  sen0395_base: !include common/sen0395-common.yaml
+
+#########################################################################
+#
+# Select Sensors
+#
+
+select:
+  - platform: template
+    name: "Location"
+    options:
+      - ""
+      - "Tirrannaville"
+      - "Goulburn"
+      - "Bowral"
+      - "Wagga Wagga"
+    id: location_select
+    restore_value: true  # This ensures the selected value is persisted across reboots
+    entity_category: diagnostic    
+
 
 #########################################################################
 #
@@ -99,7 +148,6 @@ binary_sensor:
 #
 
 sensor:
-
    # Sensor uptime in seconds
   - platform: uptime
     name: "Uptime Seconds"
@@ -172,6 +220,16 @@ text_sensor:
       return {"${power_circuit}"};
     update_interval: 6h
 
+  #  Creates a sensor showing the Aviagen Asset Tag ID of the device
+  - platform: template
+    name: 'Asset Tag'
+    id: asset_tag
+    icon: "mdi:tag"
+    entity_category: diagnostic
+    lambda: |-
+      return {"${asset_id}"};
+    update_interval: 6h
+    
    # Creates a sensor of the uptime of the device, in formatted days, hours, minutes and seconds
    # from : https://community.home-assistant.io/t/uptime-sensor-in-hours-or-days/116392/29
   - platform: template
