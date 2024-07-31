@@ -100,10 +100,6 @@ switch:
 
 sensor:
 
-   # ESP32 Internal Temperature
-  - platform: internal_temperature
-    name: "Device Temperature"
-
   - platform: adc
     pin: 4
     name: "S3 IO04 Current"
