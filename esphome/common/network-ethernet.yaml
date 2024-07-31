@@ -22,8 +22,6 @@
 ##########################
 # Network Settings
 #
-   # Enables faster network connections, with last connected SSID being connected to and no full scan for SSID being undertaken
-  wifi_fast_connect: "true"
    # Enable or disable the use of IPv6 networking on the device
   ipv6_enable: "false"
    # Network - Static IP - Address. Leave empty to use DHCP.
