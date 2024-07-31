@@ -5,7 +5,7 @@
 
 substitutions:
 
-##########################
+###############################
 # Location/Site Details:
 #
    # The Aviagen site location, upon which this device is deployed. Used to populate a Text Sensor with this information.
@@ -18,7 +18,7 @@ substitutions:
    # Asset Tag Details:
   asset_id: ""
 
-##########################
+###############################
 # Time Update Settings:
 #
    # Set timezone of the smart plug. Useful if the plug is in a location different to the HA server. Can be entered in unix Country/Area format (i.e. "Australia/Sydney")
@@ -30,14 +30,17 @@ substitutions:
   sntp_server_2: "1.au.pool.ntp.org"
   sntp_server_3: "2.au.pool.ntp.org"
 
-##########################
+
+###############################
 # Network Settings
 #
-   # Enables faster network connections, with last connected SSID being connected to and no full scan for SSID being undertaken
-  wifi_fast_connect: "true"
    # Enable or disable the use of IPv6 networking on the device
   ipv6_enable: "false"
-   # Network - Static IP - Address
+
+###############################
+# Network Settings - Static IP
+#
+   # Network - Static IP - Address  
   network_ip: ""
    # Network - Static IP - Gateway
   network_gateway: ""
