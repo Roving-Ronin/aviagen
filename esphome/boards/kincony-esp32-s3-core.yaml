@@ -19,9 +19,6 @@ substitutions:
 # ESP Device Settings
 #
 
-esp32:
-  flash_size: 16MB
-
 esphome:
   platformio_options:
     board_build.flash_mode: dio
