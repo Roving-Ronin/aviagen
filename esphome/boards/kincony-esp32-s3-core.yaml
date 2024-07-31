@@ -256,6 +256,3 @@ sensor:
     attenuation: 11db
     filters:
       - multiply: 5
-
-web_server:
-  port: 80
