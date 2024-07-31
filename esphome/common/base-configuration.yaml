@@ -61,7 +61,7 @@ substitutions:
   log_level: "INFO"
  
 
-#########################################################################
+########################## End of Substitutions #########################
 
 esphome:
    # Configures these settings to use the substitutions defined below
