@@ -131,8 +131,8 @@ select:
       - "Wagga Wagga"
     id: location_select
     restore_value: true  # This ensures the selected value is persisted across reboots
-    entity_category: diagnostic    
-
+    entity_category: diagnostic
+    update_interval: 6h
 
 #########################################################################
 #
