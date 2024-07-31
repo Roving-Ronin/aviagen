@@ -132,6 +132,7 @@ binary_sensor:
   - platform: status
     name: "Device Status"
     id: device_status
+    icon: "mdi:check-network-outline"
     entity_category: diagnostic
 
 ##########################################################################
