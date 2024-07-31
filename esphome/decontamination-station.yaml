@@ -60,7 +60,7 @@ dashboard_import:
 
 packages:
   base-config:            !include common/base-configuration.yaml
-  network-config:         !include common/network-ethernet.yaml
+#  network-config:         !include common/network-ethernet.yaml
   bme280a-sensors:        !include sensors/bme280-bus-a.yaml
 # bme280b-sensors:         !include sensors/bme280-bus-b.yaml  # Enabled if a second i2c bus and BME280 is required
   kincony-esp32-s3-core:  !include boards/kincony-esp32-s3-core.yaml
