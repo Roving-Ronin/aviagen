@@ -141,6 +141,18 @@ select:
     id: location_select
     restore_value: true  # This ensures the selected value is persisted across reboots
     entity_category: diagnostic
+    set_action:
+      - lambda: |-
+          ESP_LOGD("location_select", "Location selected: %s", x.c_str());
+          if (x == "Tirrannaville") {
+            // Handle action for Tirrannaville
+          } else if (x == "Goulburn") {
+            // Handle action for Goulburn
+          } else if (x == "Bowral") {
+            // Handle action for Bowral
+          } else if (x == "Wagga Wagga") {
+            // Handle action for Wagga Wagga
+          }    
     update_interval: 6h
 
 #########################################################################
