@@ -22,8 +22,6 @@
 ##########################
 # Network Settings
 #
-   # Enable or disable the use of IPv6 networking on the device
-  ipv6_enable: "false"
    # Network - Static IP - Address. Leave empty to use DHCP.
   network_ip: ""
    # Network - Static IP - Gateway. Leave empty to use DHCP.
