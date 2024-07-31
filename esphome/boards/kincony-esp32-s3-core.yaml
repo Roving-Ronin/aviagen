@@ -14,20 +14,6 @@ substitutions:
   bus_a_scl_pin: "GPIO39"
   bus_a_frequency: "100kHz"    # Optional: 100kHz
 
-
-##########################################################################
-#
-# Remote Packages
-#
-
-packages:
-  remote_package:
-    url: https://github.com/Roving-Ronin/aviagen/
-    ref: main 
-    files: [esphome/common/network-ethernet-w5500.yaml]
-    refresh: 5s # optional
-
-
 ########################## End of Substitutions #########################
 #
 # ESP Device Settings
