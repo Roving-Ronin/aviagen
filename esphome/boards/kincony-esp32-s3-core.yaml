@@ -109,7 +109,7 @@ sensor:
     name: "S3 IO04 Current"
     update_interval: 2s
     unit_of_measurement: V
-    attenuation: 11db
+    attenuation: 12db
     filters:
       - multiply: 5
 
@@ -118,7 +118,7 @@ sensor:
     name: "S3 IO05 Current"
     update_interval: 2s
     unit_of_measurement: V
-    attenuation: 11db
+    attenuation: 12db
     filters:
       - multiply: 5
 
@@ -127,7 +127,7 @@ sensor:
     name: "S3 IO06 Current"
     update_interval: 2s
     unit_of_measurement: V
-    attenuation: 11db
+    attenuation: 12db
     filters:
       - multiply: 5
 
@@ -136,7 +136,7 @@ sensor:
     name: "S3 IO07 Current"
     update_interval: 2s
     unit_of_measurement: V
-    attenuation: 11db
+    attenuation: 12db
     filters:
       - multiply: 5
 
