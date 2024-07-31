@@ -104,6 +104,43 @@ sensor:
   - platform: internal_temperature
     name: "Device Temperature"
 
+  - platform: adc
+    pin: 4
+    name: "S3 IO04 Current"
+    update_interval: 2s
+    unit_of_measurement: V
+    attenuation: 11db
+    filters:
+      - multiply: 5
+
+  - platform: adc
+    pin: 5
+    name: "S3 IO05 Current"
+    update_interval: 2s
+    unit_of_measurement: V
+    attenuation: 11db
+    filters:
+      - multiply: 5
+
+  - platform: adc
+    pin: 6
+    name: "S3 IO06 Current"
+    update_interval: 2s
+    unit_of_measurement: V
+    attenuation: 11db
+    filters:
+      - multiply: 5
+
+  - platform: adc
+    pin: 7
+    name: "S3 IO07 Current"
+    update_interval: 2s
+    unit_of_measurement: V
+    attenuation: 11db
+    filters:
+      - multiply: 5
+
+
 ##########################################################################
 #
 # Binary Sensors
@@ -219,40 +256,3 @@ binary_sensor:
         input: true
         pullup: true
 
-sensor:
-
-  - platform: adc
-    pin: 4
-    name: "S3 IO04 Current"
-    update_interval: 2s
-    unit_of_measurement: V
-    attenuation: 11db
-    filters:
-      - multiply: 5
-
-  - platform: adc
-    pin: 5
-    name: "S3 IO05 Current"
-    update_interval: 2s
-    unit_of_measurement: V
-    attenuation: 11db
-    filters:
-      - multiply: 5
-
-  - platform: adc
-    pin: 6
-    name: "S3 IO06 Current"
-    update_interval: 2s
-    unit_of_measurement: V
-    attenuation: 11db
-    filters:
-      - multiply: 5
-
-  - platform: adc
-    pin: 7
-    name: "S3 IO07 Current"
-    update_interval: 2s
-    unit_of_measurement: V
-    attenuation: 11db
-    filters:
-      - multiply: 5
