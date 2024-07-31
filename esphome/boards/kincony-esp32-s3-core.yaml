@@ -8,7 +8,7 @@
 #
 # Substitutions
 #
-
+substitutions:
    # I2C PINS - Used for BME280 sensor Bus A
   bus_a_sda_pin: "GPIO38"
   bus_a_scl_pin: "GPIO39"
