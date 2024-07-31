@@ -20,20 +20,6 @@ substitutions:
    # (Optional, Pin Schema): The pin controlling the power/reset status of the Ethernet controller.
   ether_power_pin: "GPIO16"
 
-##########################
-# Network Settings
-#
-   # Network - Static IP - Address. Leave empty to use DHCP.
-  network_ip: ""
-   # Network - Static IP - Gateway. Leave empty to use DHCP.
-  network_gateway: ""
-   # Network - Static IP - Subnet Mask. Leave empty to use DHCP.
-  network_subnet: ""
-   # Network - Static IP - DNS Servers. Leave empty to use DHCP.
-  dns_server1: ""
-  dns_server2: ""
-   # Define a domain for this device to use. i.e. iot.home.lan (so device will appear as athom-smart-plug-v2.iot.home.lan in DNS/DHCP logs)
-  dns_domain: ""
 
 ########################## End of Substitutions #########################
 #
