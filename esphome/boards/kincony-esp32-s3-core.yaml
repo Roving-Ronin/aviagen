@@ -14,6 +14,40 @@ substitutions:
   bus_a_scl_pin: "GPIO39"
   bus_a_frequency: "100kHz"    # Optional: 100kHz
 
+
+##########################################################################
+#
+# Ethernet Device - Type W5500
+#
+ethernet:
+  type: W5500
+  clk_pin: GPIO43
+  mosi_pin: GPIO44
+  miso_pin: GPIO42
+  cs_pin: GPIO41
+  interrupt_pin: GPIO2
+  reset_pin: GPIO1
+
+   # Configuration entries for RMII chips
+  ether_type: "W5500"
+   # The MDC pin of the board. Usually this is GPIO23.
+  ether_mdc_pin: "GPIO23"
+   # The MDIO pin of the board. Usually this is GPIO18.
+  ether_mdio_pin: "GPIO18"
+   # (Optional, string): The clock mode of the data lines. See your board’s datasheet for more details.
+  ether_clock_mode: "GPIO0_IN"
+   # (Optional, Pin Schema): The pin controlling the power/reset status of the Ethernet controller.
+  ether_power_pin: "GPIO16"
+
+
+packages:
+  remote_package:
+    url: https://github.com/Roving-Ronin/aviagen/
+    ref: main 
+    files: [esphome/common/network-ethernet-w5500.yaml]
+    refresh: 5s # optional
+
+
 ########################## End of Substitutions #########################
 #
 # ESP Device Settings
@@ -30,20 +64,6 @@ esp32:
 #    type: esp-idf
     version: recommended
   flash_size: 16MB
-
-##########################################################################
-#
-# Ethernet Device - Type W5500
-#
-
-ethernet:
-  type: W5500
-  clk_pin: GPIO43
-  mosi_pin: GPIO44
-  miso_pin: GPIO42
-  cs_pin: GPIO41
-  interrupt_pin: GPIO2
-  reset_pin: GPIO1
 
 ##########################################################################
 #
