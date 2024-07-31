@@ -102,7 +102,7 @@ sensor:
     name: "BME680 - Equivalent Sea Level Pressure"
     unit_of_measurement: 'hPa'    
     lambda: |-
-      const float STANDARD_ALTITUDE = 656; // in meters, see note
+      const float STANDARD_ALTITUDE = 667; // in meters, see note
       return id(bme680_pressure).state / powf(1 - ((0.0065 * STANDARD_ALTITUDE) /
         (id(bme680_temperature).state + (0.0065 * STANDARD_ALTITUDE) + 273.15)), 5.257); // in hPa
     update_interval: 15s
