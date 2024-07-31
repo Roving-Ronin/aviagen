@@ -7,15 +7,11 @@
    # Provides substitutions or variables that are then called elsewhere multiple times in the config
 substitutions:
    # Default name  
-  name: "decontimination-station"
+  name: "sitename-decontamination-station"
    # Default friendly name 
-  friendly_name: "Decontamination Station"
+  friendly_name: "Sitename - Decontamination Station"
    # Description as appears in ESPHome & top of webserver page
   device_description: "Decontamination Station - Water & Environmental Monitor (Temp./Humidity/Pressure)"
-   # Allows ESP device to be automatically lined to an 'Area' in Home Assistant. Typically used for areas such as 'Lounge Room', 'Kitchen' etc    
-  location: "Front Gate"
-   # The phase in the home power supply, upon which this plug is utilsed. 1p = A. 3p = A, B or C.  (myHome GPO 1 = Phase C, GPO 2 = Phase A, GPO 3 = Phase B)
-  power_circuit: "TBC"  
    # Project Name
   project_name: "Aviagen.Environmental Monitor"
    # Project version denotes the release version of the yaml file, allowing checking of deployed vs latest version  
@@ -24,8 +20,9 @@ substitutions:
    # If true, entity should not be added to Home Assistant frontend, without the user manually enabling it.
   disable_by_default: "false"
 
-   # BME 280 / BME680 Sensor
-   #
+###############################
+# BME 280 / BME680 Sensor
+#
    # Location of BME280/680 Sensor #1. Used to prefix sensor if there are two. Leave empty if only 1. Add a " - " to the end of each entry if used.
   bme_sensor1_location: ""
    # Location of BME280/680 Sensor #2. Used to prefix sensor if there are two. Leave empty if only 1. Add a " - " to the end of each entry if used.
@@ -65,7 +62,7 @@ packages:
   base-config:      !include common/base-configuration.yaml
   wifi-config:      !include common/network-ethernet.yaml
   bme280a-sensors:  !include sensors/bme280-bus-a.yaml
-# bme280b-sensors:  !include sensors/bme280-bus-b.yaml
+# bme280b-sensors:  !include sensors/bme280-bus-b.yaml  # Enabled if a second i2c bus and BME280 is required
   kincony-s3-core:  !include boards/kincony-esp32-s3-core.yaml
 
 
