@@ -20,21 +20,21 @@
   ether_power_pin: "GPIO16"
 
 ##########################
-# Static IP Settings
+# Network Settings
 #
    # Enables faster network connections, with last connected SSID being connected to and no full scan for SSID being undertaken
   wifi_fast_connect: "true"
    # Enable or disable the use of IPv6 networking on the device
   ipv6_enable: "false"
-   # Network - Static IP - Address
+   # Network - Static IP - Address. Leave empty to use DHCP.
   network_ip: ""
-   # Network - Static IP - Gateway
+   # Network - Static IP - Gateway. Leave empty to use DHCP.
   network_gateway: ""
-   # Network - Static IP - Subnet Mask
+   # Network - Static IP - Subnet Mask. Leave empty to use DHCP.
   network_subnet: ""
-   # Network - Static IP - DNS Servers
-  dns_server1: "8.8.8.8"
-  dns_server2: "1.1.1.1"
+   # Network - Static IP - DNS Servers. Leave empty to use DHCP.
+  dns_server1: ""
+  dns_server2: ""
    # Define a domain for this device to use. i.e. iot.home.lan (so device will appear as athom-smart-plug-v2.iot.home.lan in DNS/DHCP logs)
   dns_domain: ""
 
