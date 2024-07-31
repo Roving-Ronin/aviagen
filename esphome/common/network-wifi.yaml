@@ -1,12 +1,11 @@
 #########################################################################
 #
-# ESP828x and ESP32 Settings, common across all WiFi Connected Devices
+# Substitutions
 #
 
 substitutions:
    # Enables faster network connections, with last connected SSID being connected to and no full scan for SSID being undertaken
   wifi_fast_connect: "true"
-
 
 #########################################################################
 #
