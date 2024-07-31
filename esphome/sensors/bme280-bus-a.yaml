@@ -88,7 +88,7 @@ sensor:
     unit_of_measurement: 'hPa'
 #    state_class: 'measurement'
     lambda: |-
-      const float STANDARD_ALTITUDE = 656; // in meters, see note
+      const float STANDARD_ALTITUDE = 667; // in meters, see note
       return id(bme280a_pressure).state / powf(1 - ((0.0065 * STANDARD_ALTITUDE) /
         (id(bme280a_temperature).state + (0.0065 * STANDARD_ALTITUDE) + 273.15)), 5.257); // in hPa
     update_interval: 15s
