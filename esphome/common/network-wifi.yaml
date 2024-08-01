@@ -45,6 +45,7 @@ sensor:
     id: wifi_signal_db
     name: "WiFi Signal dB"
     update_interval: 150s
+    icon: mdi:wifi-strength-2
     entity_category: "diagnostic"
     internal: true
 
@@ -53,6 +54,7 @@ sensor:
     source_id: wifi_signal_db
     name: "WiFi Strength"
     id: wifi_strength
+    icon: mdi:wifi-arrow-up-down
     filters:
       - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
     unit_of_measurement: "%"
