@@ -57,6 +57,7 @@ sensor:
         - sliding_window_moving_average:
             window_size: 15
             send_every: 15
+      icon: mdi:temperature-celsius
 
      # Pressure in hPa
     pressure:
@@ -72,6 +73,7 @@ sensor:
         - sliding_window_moving_average:
             window_size: 15
             send_every: 15
+      icon: mdi:gauge
       
      # Relative humidity %
     humidity:
@@ -87,6 +89,7 @@ sensor:
         - sliding_window_moving_average:
             window_size: 15
             send_every: 15
+      icon: mdi:water-percent
       
    # BME280 Sensor in I2C Port - Absolute Humidity
   - platform: absolute_humidity
@@ -94,12 +97,13 @@ sensor:
     temperature: bme280b_temperature
     humidity: bme280b_humidity
     equation: Wobus   # Wobus (Default), optional Tetens or Buck
+    icon: mdi:water-percent
 
    # BME280 Sensor in I2C Port - Dew Point
   - platform: template
     name: "${bme_sensor2_location}Dew Point"
     unit_of_measurement: °C
-    icon: 'mdi:thermometer-alert'    
+    icon: mdi:thermometer-water  
     lambda: |-
       return (243.5*(log(id(bme280b_humidity).state/100)+((17.67*id(bme280b_temperature).state)/
       (243.5+id(bme280b_temperature).state)))/(17.67-log(id(bme280b_humidity).state/100)-
@@ -109,7 +113,8 @@ sensor:
    # Note: This is based on 655m for Goulburn North, NSW. Australia. Update for a different location.
   - platform: template
     name: "${bme_sensor2_location}Equivalent Sea Level Pressure"
-    unit_of_measurement: 'hPa'    
+    unit_of_measurement: 'hPa'
+    icon: mdi:gauge
     lambda: |-
       const float STANDARD_ALTITUDE = 667; // in meters, see note
       return id(bme280b_pressure).state / powf(1 - ((0.0065 * STANDARD_ALTITUDE) /
