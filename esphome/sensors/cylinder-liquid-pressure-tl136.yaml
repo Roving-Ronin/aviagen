@@ -57,7 +57,7 @@ globals:
 sensor:
 
   - platform: adc
-    pin: ${analog_a1}
+    pin: ${analog_1}
     name: "Tank - Voltage"
     id: "tank_voltage"
     accuracy_decimals: 3
