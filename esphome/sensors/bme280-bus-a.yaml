@@ -2,8 +2,23 @@
 #
 # Pacakge to configure the use of a device with a BME280 sensor
 #
-  
+
 #########################################################################
+#
+# Substitutions
+#
+substitutions:
+   # BME 280 / BME680 Sensor
+   # Location of BME280/680 Sensor #1. Used to prefix sensor if there are two. Leave empty if only 1. Add a " - " to the end of each entry if used.
+  bme_sensor1_location: ""
+   # Calibrate the outpute of the temperature sensor(s).
+  temperature_1_offset: "0.0"
+   # Calibrate the outpute of the pressure sensor(s).
+  pressure_1_offset: "0.0"
+   # Calibrate the outpute of the humidity sensor(s).
+  humidity_1_offset: "0.0"
+  
+########################## End of Substitutions #########################
 #
 # Configure the i2c bus, to find and operate the BME280 sensor
 #
