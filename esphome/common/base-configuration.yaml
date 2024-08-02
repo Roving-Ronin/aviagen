@@ -160,7 +160,7 @@ sensor:
   - platform: uptime
     name: "Uptime Seconds"
     id: uptime_seconds
-    update_interval: 30s
+#    update_interval: 30s
     entity_category: diagnostic
     internal: True
 
