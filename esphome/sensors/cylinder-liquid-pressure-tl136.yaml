@@ -34,19 +34,14 @@ substitutions:
 #
 
 globals:
-  - id: tank_height
-    type: float
-#    restore_value: no
-    initial_value: ${inlet_height}
-
   - id: container_diameter
     type: float
-#    restore_value: no
+    restore_value: no
     initial_value: ${tank_diameter}
 
   - id: container_radius
     type: float
-#    restore_value: no
+    restore_value: no
     initial_value: ${tank_radius}
 
 
@@ -93,64 +88,38 @@ sensor:
 ################################################################################
 #
 # Water Tank - Conversions and metrics from pressure sensor
-#
+# NOTE: You MUST update the calibrate_linear recorded Voltage to Levels in the Tank.
+# eg. 4.01667 -> 241.0 being 4.01667V is the voltage when the tank is at 241.0cm (100%)
+#     then do the same for each 10% down to 0.0000V = 0cm / 0%
 
-#  - platform: template
-#    name: "Tank - Level"
-#    id: "tank_level"
-#    icon: 'mdi:water-well'
-#    unit_of_measurement: 'cm'
-#    lambda: |-
-#      float tank_height = id(tank_height);
-#      float voltage = id(tank_voltage).state;
-#      if (voltage >= 4.01667) return tank_height;
-#      if (voltage >= 3.61500) return tank_height * 0.9;
-#      if (voltage >= 3.21333) return tank_height * 0.8;
-#      if (voltage >= 2.81167) return tank_height * 0.7;
-#      if (voltage >= 2.41000) return tank_height * 0.6;
-#      if (voltage >= 2.00833) return tank_height * 0.5;
-#      if (voltage >= 1.60667) return tank_height * 0.4;
-#      if (voltage >= 1.20500) return tank_height * 0.3;
-#      if (voltage >= 0.80333) return tank_height * 0.2;
-#      if (voltage >= 0.40167) return tank_height * 0.1;
-#      return 0.0;
-#    update_interval: 1s
-#    filters:
-#      - lambda: |-
-#          float tank_height = id(tank_height);
-#          float voltage = x; // `x` is the input voltage value
-#          if (voltage >= 4.01667) return tank_height;
-#          if (voltage >= 3.61500) return tank_height * 0.9;
-#          if (voltage >= 3.21333) return tank_height * 0.8;
-#          if (voltage >= 2.81167) return tank_height * 0.7;
-#          if (voltage >= 2.41000) return tank_height * 0.6;
-#          if (voltage >= 2.00833) return tank_height * 0.5;
-#          if (voltage >= 1.60667) return tank_height * 0.4;
-#          if (voltage >= 1.20500) return tank_height * 0.3;
-#          if (voltage >= 0.80333) return tank_height * 0.2;
-#          if (voltage >= 0.40167) return tank_height * 0.1;
-#          return 0.0;
+  - platform: template
+    name: "Tank - Level"
+    id: "tank_level"
+    icon: 'mdi:water-well'
+    unit_of_measurement: 'cm'
+    lambda: |-
+        return id(water_tank_voltage).state;
+    update_interval: 1s #the delta filter will ensure it only sends values when something changes. 
+    filters:
+      - calibrate_linear:
+          # Measured value of X volt maps to Y cm
+          - 4.01667 -> 241.0   # 100%
+          - 3.61500 -> 216.9   #  90%
+          - 3.21333 -> 192.8   #  80%
+          - 2.81167 -> 168.7   #  70%
+          - 2.41000 -> 144.6   #  60%
+          - 2.00833 -> 120.5   #  50%
+          - 1.60667 -> 96.4    #  40%
+          - 1.20500 -> 72.3    #  30%
+          - 0.80333 -> 48.2    #  20%
+          - 0.40167 -> 24.1    #  10%
+          - 0.00000 -> 0.00    #   0%
+    # From https://www.sensorsone.com/measurement-to-linear-0-5v-converter/?iunit=cm&irdg=0.8452500672&ilo=0.469&ihi=4.016666&ounit=V&olo=0&ohi=5
+      - delta : 0.001                  # Only send the result if the difference with the last sent result is higher than this
+      - offset: ${tank_level_offset}   # Add 0.01847cm to total, to correct to 0L when voltage is 0.469V
+    internal: true
 
-      
-#          - 4.01667 -> 241.0    # 100%
-#          - 3.61500 -> 216.9    #  90%
-#          - 3.21333 -> 192.8    #  80%
-#          - 2.81167 -> 168.7    #  70%
-#          - 2.41000 -> 144.6    #  60%
-#          - 2.00833 -> 120.5    #  50%
-#          - 1.60667 -> 96.4     #  40%
-#          - 1.20500 -> 72.3     #  30%
-#          - 0.80333 -> 48.2     #  20%
-#          - 0.40167 -> 24.1     #  10%
-#          - 0.00000 -> 0.00     #   0%
-
-
-        # From https://www.sensorsone.com/measurement-to-linear-0-5v-converter/?iunit=cm&irdg=0.8452500672&ilo=0.469&ihi=4.016666&ounit=V&olo=0&ohi=5
-#      - delta : 0.001                  # Only send the result if the difference with the last sent result is higher than this
-#      - offset: ${tank_level_offset}   # Add 0.01847cm to total, to correct to 0L when voltage is 0.469V
-#    internal: true
-
-   # Sensor used to publish the 'Tank Level' sensor, but with the prefixed name of the tank (i.e. Water)
+    # Sensor used to publish the 'Tank Level' sensor, but with the prefixed name of the tank (i.e. Water)
   - platform: template
     name: "${tank_name} Tank - Level"
     id: "${tank_name}_tank_level"
@@ -178,7 +147,7 @@ sensor:
     # divide by max water level height to get a percentage. Inlet height 2410mm / tank height 2485mm. Diameter 2380mm. 10,000L
     # H 2410mm x D 2380mm = 10,721.6305 L (Full).   2410mm = 23.56kPa / .24bar / 3.42psi / 176.75 mmHg
     # local gravity = 9.79697g ms2.  1,000L = 979.697kg
-#    update_interval: 1s #the delta filter will ensure it only sends values when something changes. 
+    update_interval: 1s #the delta filter will ensure it only sends values when something changes. 
     filters:
       - delta : 0.1 #only send the result if the difference with the last sent result is higher than this
 
