@@ -163,7 +163,7 @@ sensor:
     lambda: |-
       return id(tank_level).state / 1000 * 3.14159265359 * id(container_radius) * id(container_radius);
 #
-#      if (id(water_tank_level).state <= 0) {
+#      if (id(tank_level).state <= 0) {
 #        return {"Empty"};
 #      }
 #      else {
