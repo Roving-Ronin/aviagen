@@ -24,9 +24,6 @@ substitutions:
    # Description as appears in ESPHome & top of webserver page
   device_description: "Potable Water & Environmental Monitor (Temp./Humidity/Pressure)"
 
-   # If true, entity should not be added to Home Assistant frontend, without the user manually enabling it.
-  disable_by_default: "false"
-
 ###############################
 # Location & Site Details:
 #
@@ -39,25 +36,6 @@ substitutions:
   power_circuit: "TBA"
    # Asset Tag Details:
   asset_id: ""
-
-
-
-###############################
-# BME 280 / BME680 Sensor
-#
-   # Location of BME280/680 Sensor #1. Used to prefix sensor if there are two. Leave empty if only 1. Add a " - " to the end of each entry if used.
-  bme_sensor1_location: ""
-   # Location of BME280/680 Sensor #2. Used to prefix sensor if there are two. Leave empty if only 1. Add a " - " to the end of each entry if used.
-  bme_sensor2_location: ""
-   # Calibrate the outpute of the temperature sensor(s).
-  temperature_1_offset: "0.0"
-  temperature_2_offset: "0.0"
-   # Calibrate the outpute of the pressure sensor(s).
-  pressure_1_offset: "0.0"
-  pressure_2_offset: "0.0"
-   # Calibrate the outpute of the humidity sensor(s).
-  humidity_1_offset: "0.0"
-  humidity_2_offset: "0.0"
 
 
 ########################## End of Substitutions #########################
@@ -84,7 +62,6 @@ packages:
   base-config:            !include common/base-configuration.yaml
   network-config:         !include common/network-ethernet-w5500.yaml
   bme280a-sensors:        !include sensors/bme280-bus-a.yaml
-# bme280b-sensors:         !include sensors/bme280-bus-b.yaml  # Enabled if a second i2c bus and BME280 is required
   kincony-esp32-s3-core:  !include boards/kincony-esp32-s3-core.yaml
 
 #########################################################################
