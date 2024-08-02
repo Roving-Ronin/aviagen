@@ -29,8 +29,10 @@ substitutions:
 #
    # The Aviagen site location, upon which this device is deployed. Used to populate a Text Sensor with this information, i.e. Tirrannaville / Goulburn / Bowral / Wagga Wagga.
   site: ""
-   # Allows ESP device to be automatically lined to an 'Area' in Home Assistant. Typically used for areas such as 'Front Gate, Decontamination, Shed #  etc  
+   # Allows ESP device to be automatically lined to an 'Area' in Home Assistant. Typically used for areas such as 'Front Gate, Decontamination, Shed XYZ etc  
   location: ""
+   # Location geographical height, in meters. Used for calculations in sensors such as BME280/BME680 and Water Tank sensors:
+  location_height: ""
    # The phase in the locations power supply, upon which this device is utilsed. 1p = A. 3p = A, B or C.  (GPO 1 = Phase A, GPO 2 = Phase B, GPO 3 = Phase C).
    # Used to populate a Text Sensor with this information, that may be used to loadshed in future, or trace outages to electrical faults.
   power_circuit: "TBA"
