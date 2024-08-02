@@ -50,6 +50,7 @@ sensor:
       accuracy_decimals: 1
       filters:
         offset: ${temperature_1_offset}
+      icon: mdi:temperature-celsius
         
      # Pressure in hPa
     pressure:
@@ -58,6 +59,7 @@ sensor:
       accuracy_decimals: 1
       filters:
         offset: ${pressure_1_offset}
+      icon: mdi:gauge
     
      # Relative humidity %
     humidity:
@@ -66,6 +68,7 @@ sensor:
       accuracy_decimals: 1
       filters:
         offset: ${humidity_1_offset}
+      icon: mdi:water-percent
 
    # BME280 Sensor in I2C Port - Absolute Humidity
   - platform: absolute_humidity
@@ -73,6 +76,7 @@ sensor:
     temperature: bme280a_temperature
     humidity: bme280a_humidity
     equation: Wobus   # Wobus (Default), optional Tetens or Buck
+    icon: mdi:water-percent
 
    # Pressure in kPa
 #  - platform: template
@@ -89,7 +93,7 @@ sensor:
     name: "${bme_sensor1_location}Dew Point"
     unit_of_measurement: °C
 #    state_class: 'measurement'
-    icon: 'mdi:thermometer-alert'    
+    icon: mdi:thermometer-water
     lambda: |-
       return (243.5*(log(id(bme280a_humidity).state/100)+((17.67*id(bme280a_temperature).state)/
       (243.5+id(bme280a_temperature).state)))/(17.67-log(id(bme280a_humidity).state/100)-
@@ -103,10 +107,11 @@ sensor:
     unit_of_measurement: 'hPa'
 #    state_class: 'measurement'
     lambda: |-
-      const float STANDARD_ALTITUDE = 667; // in meters, see note
+      const float STANDARD_ALTITUDE = 656; // in meters, see note
       return id(bme280a_pressure).state / powf(1 - ((0.0065 * STANDARD_ALTITUDE) /
         (id(bme280a_temperature).state + (0.0065 * STANDARD_ALTITUDE) + 273.15)), 5.257); // in hPa
     update_interval: 15s
+    icon: mdi:gauge
 
 
    # Note: Only Altitude OR Equivalent Sea Level Pressure can be run at one time, not both.
