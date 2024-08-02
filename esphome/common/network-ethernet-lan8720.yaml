@@ -66,14 +66,14 @@ text_sensor:
 #      address_4:
 #        name: Device IP Address 4
 
-    dns_address:
-      name: DNS Servers
-      icon: "mdi:check-network-outline"
-      web_server_sorting_weight: 49
-
     mac_address:
       name: MAC Address
       icon: "mdi:network-pos"
+      web_server_sorting_weight: 49
+
+    dns_address:
+      name: DNS Servers
+      icon: "mdi:check-network-outline"
       web_server_sorting_weight: 50
 
 ##########################################################################
