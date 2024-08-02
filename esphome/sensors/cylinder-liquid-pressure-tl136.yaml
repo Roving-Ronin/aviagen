@@ -104,7 +104,26 @@ sensor:
         return id(tank_voltage).state;
     update_interval: 1s #the delta filter will ensure it only sends values when something changes. 
     filters:
-      - calibrate_linear:
+      - lambda: |-
+          float tank_height = id(tank_height);
+          return {
+            4.01667f, tank_height,
+            3.61500f, tank_height * 0.9f,
+            3.21333f, tank_height * 0.8f,
+            2.81167f, tank_height * 0.7f,
+            2.41000f, tank_height * 0.6f,
+            2.00833f, tank_height * 0.5f,
+            1.60667f, tank_height * 0.4f,
+            1.20500f, tank_height * 0.3f,
+            0.80333f, tank_height * 0.2f,
+            0.40167f, tank_height * 0.1f,
+            0.00000f, 0.0f
+          };
+      - calibrate_linear: !lambda |-
+          auto values = id(tank_level).get_filter(0)->get_values();
+          return values;
+
+      
 #          - 4.01667 -> 241.0    # 100%
 #          - 3.61500 -> 216.9    #  90%
 #          - 3.21333 -> 192.8    #  80%
@@ -117,33 +136,6 @@ sensor:
 #          - 0.40167 -> 24.1     #  10%
 #          - 0.00000 -> 0.00     #   0%
 
-
-        lambda: |-
-          float voltage = id(tank_voltage).state;
-          float height = id(container_diameter);  // or whatever height calculation you need
-          if (voltage >= 4.01667) {
-            return height * 1.0;
-          } else if (voltage >= 3.61500) {
-            return height * 0.9;
-          } else if (voltage >= 3.21333) {
-            return height * 0.8;
-          } else if (voltage >= 2.81167) {
-            return height * 0.7;
-          } else if (voltage >= 2.41000) {
-            return height * 0.6;
-          } else if (voltage >= 2.00833) {
-            return height * 0.5;
-          } else if (voltage >= 1.60667) {
-            return height * 0.4;
-          } else if (voltage >= 1.20500) {
-            return height * 0.3;
-          } else if (voltage >= 0.80333) {
-            return height * 0.2;
-          } else if (voltage >= 0.40167) {
-            return height * 0.1;
-          } else {
-            return 0.0;
-          }
 
         # From https://www.sensorsone.com/measurement-to-linear-0-5v-converter/?iunit=cm&irdg=0.8452500672&ilo=0.469&ihi=4.016666&ounit=V&olo=0&ohi=5
       - delta : 0.001                  # Only send the result if the difference with the last sent result is higher than this
