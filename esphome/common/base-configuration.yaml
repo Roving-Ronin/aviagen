@@ -136,21 +136,6 @@ globals:
     type: float
     initial_value: ${location_height}
 
-  - id: tank_height
-    type: float
-#    restore_value: no
-    initial_value: ${inlet_height}
-
-  - id: container_diameter
-    type: float
-#    restore_value: no
-    initial_value: ${tank_diameter}
-
-  - id: container_radius
-    type: float
-#    restore_value: no
-    initial_value: ${tank_radius}
-
 #########################################################################
 #
 # Binary Sensors
