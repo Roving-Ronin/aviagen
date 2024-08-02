@@ -3,22 +3,44 @@
 # Environmental monitoring using ESP32-S3 chipset and BME280 sensor(s)
 # for temperature, humidity, pressure & dew point.
 #
-
    # Provides substitutions or variables that are then called elsewhere multiple times in the config
 substitutions:
+
+###############################
+# Project Version Details:
+#
+   # Project Name
+  project_name: "Aviagen.Decontamination Station"
+   # Project version denotes the release version of the yaml file, allowing checking of deployed vs latest version
+  project_version: "1.0.0"
+
+###############################
+# Device Details:
+#
    # Default name  
   name: "sitename-decontamination-station"
    # Default friendly name 
   friendly_name: "Sitename - Decontamination Station"
    # Description as appears in ESPHome & top of webserver page
-  device_description: "Decontamination Station - Water & Environmental Monitor (Temp./Humidity/Pressure)"
-   # Project Name
-  project_name: "Aviagen.Decontamination Station"
-   # Project version denotes the release version of the yaml file, allowing checking of deployed vs latest version
-  project_version: "0.1.0"
+  device_description: "Potable Water & Environmental Monitor (Temp./Humidity/Pressure)"
 
    # If true, entity should not be added to Home Assistant frontend, without the user manually enabling it.
   disable_by_default: "false"
+
+###############################
+# Location & Site Details:
+#
+   # The Aviagen site location, upon which this device is deployed. Used to populate a Text Sensor with this information, i.e. Tirrannaville / Goulburn / Bowral / Wagga Wagga.
+  site: ""
+   # Allows ESP device to be automatically lined to an 'Area' in Home Assistant. Typically used for areas such as 'Front Gate, Decontamination, Shed #  etc  
+  location: ""
+   # The phase in the locations power supply, upon which this device is utilsed. 1p = A. 3p = A, B or C.  (GPO 1 = Phase A, GPO 2 = Phase B, GPO 3 = Phase C).
+   # Used to populate a Text Sensor with this information, that may be used to loadshed in future, or trace outages to electrical faults.
+  power_circuit: "TBA"
+   # Asset Tag Details:
+  asset_id: ""
+
+
 
 ###############################
 # BME 280 / BME680 Sensor
