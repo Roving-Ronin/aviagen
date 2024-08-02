@@ -37,17 +37,17 @@ globals:
   - id: tank_height
     type: float
 #    restore_value: no
-    initial_value: "${inlet_height}"
+    initial_value: ${inlet_height}
 
   - id: container_diameter
     type: float
 #    restore_value: no
-    initial_value: "${tank_diameter}"
+    initial_value: ${tank_diameter}
 
   - id: container_radius
     type: float
 #    restore_value: no
-    initial_value: "${tank_radius}"
+    initial_value: ${tank_radius}
 
 
 #########################################################################
