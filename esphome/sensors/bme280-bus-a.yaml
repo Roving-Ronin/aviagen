@@ -52,17 +52,7 @@ sensor:
         offset: ${temperature_1_offset}
       icon: mdi:temperature-celsius
       web_server_sorting_weight: 1
-        
-     # Pressure in hPa
-    pressure:
-      name: "${bme_sensor1_location}Pressure"
-      id: bme280a_pressure
-      accuracy_decimals: 1
-      filters:
-        offset: ${pressure_1_offset}
-      icon: mdi:gauge
-      web_server_sorting_weight: 5
-    
+
      # Relative humidity %
     humidity:
       name: "${bme_sensor1_location}Humidity (Relative)"
@@ -73,15 +63,16 @@ sensor:
       icon: mdi:water-percent
       web_server_sorting_weight: 2
 
-   # BME280 Sensor in I2C Port - Absolute Humidity
-  - platform: absolute_humidity
-    name: "${bme_sensor1_location}Humidity (Absolute)"
-    temperature: bme280a_temperature
-    humidity: bme280a_humidity
-    equation: Wobus   # Wobus (Default), optional Tetens or Buck
-    icon: mdi:water-percent
-    web_server_sorting_weight: 3
-
+     # Pressure in hPa
+    pressure:
+      name: "${bme_sensor1_location}Pressure"
+      id: bme280a_pressure
+      accuracy_decimals: 1
+      filters:
+        offset: ${pressure_1_offset}
+      icon: mdi:gauge
+      web_server_sorting_weight: 5
+    
    # Pressure in kPa
 #  - platform: template
 #    name: "${bme_sensor1_location}Pressure (kPa)"
@@ -91,6 +82,15 @@ sensor:
 #      return id(bme280a_pressure).state / 10.0 ;
 #    update_interval: 15s
 #    unit_of_measurement: 'kPa'
+
+   # BME280 Sensor in I2C Port - Absolute Humidity
+  - platform: absolute_humidity
+    name: "${bme_sensor1_location}Humidity (Absolute)"
+    temperature: bme280a_temperature
+    humidity: bme280a_humidity
+    equation: Wobus   # Wobus (Default), optional Tetens or Buck
+    icon: mdi:water-percent
+    web_server_sorting_weight: 3
    
    # BME280 Sensor in I2C Port - Dew Point
   - platform: template
@@ -103,7 +103,6 @@ sensor:
       (243.5+id(bme280a_temperature).state)))/(17.67-log(id(bme280a_humidity).state/100)-
       ((17.67*id(bme280a_temperature).state)/(243.5+id(bme280a_temperature).state))));
     web_server_sorting_weight: 4
-
 
    # BME280 Sensor in I2C Port - Equivalent Sea Level Pressure 
    # Note: This is based on 655m for Goulburn North, NSW. Australia. Update for a different location.
