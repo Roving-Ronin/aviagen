@@ -20,7 +20,6 @@ substitutions:
    # (Optional, Pin Schema): The pin controlling the power/reset status of the Ethernet controller.
   ether_power_pin: "GPIO16"
 
-
 ########################## End of Substitutions #########################
 #
 # Configuration to add Ethernet network connection to ESP Devices
