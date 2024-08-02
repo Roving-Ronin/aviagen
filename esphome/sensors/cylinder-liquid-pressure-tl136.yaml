@@ -159,6 +159,7 @@ sensor:
   - platform: template
     name: "${tank_name} Tank - Litres"
     id: "${tank_name}_tank_litres"
+    icon: 'mdi:gauge'
     unit_of_measurement: 'L'
     lambda: |-
       return id(tank_level).state / 1000 * 3.14159265359 * id(container_radius) * id(container_radius);
