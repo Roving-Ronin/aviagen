@@ -31,7 +31,8 @@ substitutions:
   site: ""
    # Allows ESP device to be automatically lined to an 'Area' in Home Assistant. Typically used for areas such as 'Front Gate, Decontamination, Shed XYZ etc  
   location: ""
-   # Location geographical height, in meters. Used for calculations in sensors such as BME280/BME680 and Water Tank sensors:
+   # Location geographical height, in meters. Used for calculations in sensors such as BME280/BME680 and Water Tank sensors.
+   # Averages: Tirrannaville (656), Bowral (668), Goulburn (673) and Wagga Wagga (?). Average = 666m.
   location_height: ""
    # The phase in the locations power supply, upon which this device is utilsed. 1p = A. 3p = A, B or C.  (GPO 1 = Phase A, GPO 2 = Phase B, GPO 3 = Phase C).
    # Used to populate a Text Sensor with this information, that may be used to loadshed in future, or trace outages to electrical faults.
