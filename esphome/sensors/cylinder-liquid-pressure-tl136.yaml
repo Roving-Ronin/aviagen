@@ -101,27 +101,35 @@ sensor:
     icon: 'mdi:water-well'
     unit_of_measurement: 'cm'
     lambda: |-
-        return id(tank_voltage).state;
-    update_interval: 1s #the delta filter will ensure it only sends values when something changes. 
+      float tank_height = id(tank_height);
+      float voltage = id(tank_voltage).state;
+      if (voltage >= 4.01667) return tank_height;
+      if (voltage >= 3.61500) return tank_height * 0.9;
+      if (voltage >= 3.21333) return tank_height * 0.8;
+      if (voltage >= 2.81167) return tank_height * 0.7;
+      if (voltage >= 2.41000) return tank_height * 0.6;
+      if (voltage >= 2.00833) return tank_height * 0.5;
+      if (voltage >= 1.60667) return tank_height * 0.4;
+      if (voltage >= 1.20500) return tank_height * 0.3;
+      if (voltage >= 0.80333) return tank_height * 0.2;
+      if (voltage >= 0.40167) return tank_height * 0.1;
+      return 0.0;
+    update_interval: 1s
     filters:
       - lambda: |-
           float tank_height = id(tank_height);
-          return {
-            4.01667, tank_height,
-            3.61500, tank_height * 0.9,
-            3.21333, tank_height * 0.8,
-            2.81167, tank_height * 0.7,
-            2.41000, tank_height * 0.6,
-            2.00833, tank_height * 0.5,
-            1.60667, tank_height * 0.4,
-            1.20500, tank_height * 0.3,
-            0.80333, tank_height * 0.2,
-            0.40167, tank_height * 0.1,
-            0.00000, 0.0
-          };
-      - calibrate_linear: !lambda |-
-          auto values = id(tank_level).get_filter(0)->get_values();
-          return values;
+          float voltage = x; // `x` is the input voltage value
+          if (voltage >= 4.01667) return tank_height;
+          if (voltage >= 3.61500) return tank_height * 0.9;
+          if (voltage >= 3.21333) return tank_height * 0.8;
+          if (voltage >= 2.81167) return tank_height * 0.7;
+          if (voltage >= 2.41000) return tank_height * 0.6;
+          if (voltage >= 2.00833) return tank_height * 0.5;
+          if (voltage >= 1.60667) return tank_height * 0.4;
+          if (voltage >= 1.20500) return tank_height * 0.3;
+          if (voltage >= 0.80333) return tank_height * 0.2;
+          if (voltage >= 0.40167) return tank_height * 0.1;
+          return 0.0;
 
       
 #          - 4.01667 -> 241.0    # 100%
