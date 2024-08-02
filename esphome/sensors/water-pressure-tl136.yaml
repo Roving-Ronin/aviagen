@@ -1,0 +1,15 @@
+#
+
+
+
+#########################################################################
+#
+# Global Variables - Used to store a STATE, or share across multiple lambdas.
+#
+globals:
+  - id: xxx
+    type: float
+    initial_value: xxxx
+
+
+
