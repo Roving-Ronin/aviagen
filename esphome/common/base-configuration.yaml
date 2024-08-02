@@ -134,6 +134,7 @@ binary_sensor:
     id: device_status
     icon: "mdi:check-network-outline"
     entity_category: diagnostic
+    web_server_sorting_weight: 10
 
 ##########################################################################
 #
@@ -141,6 +142,7 @@ binary_sensor:
 #
 
 sensor:
+
    # Sensor uptime in seconds
   - platform: uptime
     name: "Uptime Seconds"
@@ -158,16 +160,19 @@ button:
   - platform: restart
     name: 'Restart Device'
     entity_category: config
-
-  - platform: factory_reset
-    name: Reset with Default Settings
-    id: Reset
-    entity_category: config
+    web_server_sorting_weight: 1
 
   - platform: safe_mode
     name: "Safe Mode"
     internal: false
     entity_category: config
+    web_server_sorting_weight: 2
+
+  - platform: factory_reset
+    name: Reset with Default Settings
+    id: Reset
+    entity_category: config
+    web_server_sorting_weight: 3
 
 ##########################################################################
 #
@@ -182,6 +187,7 @@ text_sensor:
     id: device_last_restart
     icon: mdi:clock
     entity_category: diagnostic
+    web_server_sorting_weight: 12
 
    # Creates a sensor of the name of installed project
   - platform: template
@@ -192,6 +198,7 @@ text_sensor:
     lambda: |-
       return {"${project_name}"};
     update_interval: 6h
+    web_server_sorting_weight: 30
 
    # Creates a sensor of the version of installed project
   - platform: template
@@ -202,16 +209,18 @@ text_sensor:
     lambda: |-
       return {"${project_version}"};
     update_interval: 6h
+    web_server_sorting_weight: 31
 
-  #  Creates a sensor showing power circuit / phase of the device
+  #  Creates a sensor showing the Aviagen Asset Tag ID of the device
   - platform: template
-    name: 'Power Circuit'
-    id: power_circuit
-    icon: "mdi:electric-switch"
+    name: 'Site Location'
+    id: site_location
+    icon: "mdi:map-marker-radius"
     entity_category: diagnostic
     lambda: |-
-      return {"${power_circuit}"};
+      return {"${site}"};
     update_interval: 6h
+    web_server_sorting_weight: 40
 
   #  Creates a sensor showing the Aviagen Asset Tag ID of the device
   - platform: template
@@ -222,12 +231,25 @@ text_sensor:
     lambda: |-
       return {"${asset_id}"};
     update_interval: 6h
+    web_server_sorting_weight: 42
+
+  #  Creates a sensor showing power circuit / phase of the device
+  - platform: template
+    name: 'Power Circuit'
+    id: power_circuit
+    icon: "mdi:electric-switch"
+    entity_category: diagnostic
+    lambda: |-
+      return {"${power_circuit}"};
+    update_interval: 6h
+    web_server_sorting_weight: 43
     
    # Creates a sensor of the uptime of the device, in formatted days, hours, minutes and seconds
    # from : https://community.home-assistant.io/t/uptime-sensor-in-hours-or-days/116392/29
   - platform: template
     name: "Device Uptime"
     entity_category: diagnostic
+    icon: mdi:clock-start
     lambda: |-
       int seconds = (id(uptime_seconds).state);
       int days = seconds / (24 * 3600);
@@ -247,7 +269,12 @@ text_sensor:
       } else {
         return { (String(seconds) +"s").c_str() };
       }
-    icon: mdi:clock-start
+    web_server_sorting_weight: 11
+
+##########################################################################
+#
+# Time Sync Funtion - sync using STNP time servers
+#
 
    # Updates the system time using SNTP. Upon boot also publishes when the device was started.
 time:
