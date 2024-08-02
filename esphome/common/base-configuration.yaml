@@ -126,6 +126,16 @@ network:
 #  device_version: !include common/everything-presence-one-sen0395-stable.yaml
 #  sen0395_base: !include common/sen0395-common.yaml
 
+
+#########################################################################
+#
+# Global Variables - Used to store a STATE, or share across multiple lambdas.
+#
+globals:
+  - id: location_altitude
+    type: float
+    initial_value: ${location_height}
+
 #########################################################################
 #
 # Binary Sensors
