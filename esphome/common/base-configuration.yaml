@@ -103,8 +103,8 @@ web_server:
   version: 3
    # Require BASIC authentication to access local webserver
 #  auth:
-#    username: jacomms # !secret web_server_username
-#    password: jacomms # !secret web_server_password
+#    username: !secret web_server_username
+#    password: !secret web_server_password
 
 network:
   enable_ipv6: ${ipv6_enable}
