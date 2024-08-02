@@ -117,17 +117,33 @@ sensor:
 #          - 0.40167 -> 24.1     #  10%
 #          - 0.00000 -> 0.00     #   0%
 
-          - 4.01667 -> !lambda 'return id(tank_height) * 1.0;'
-          - 3.61500 -> !lambda 'return id(tank_height) * 0.9;'
-          - 3.21333 -> !lambda 'return id(tank_height) * 0.8;'
-          - 2.81167 -> !lambda 'return id(tank_height) * 0.7;'
-          - 2.41000 -> !lambda 'return id(tank_height) * 0.6;'
-          - 2.00833 -> !lambda 'return id(tank_height) * 0.5;'
-          - 1.60667 -> !lambda 'return id(tank_height) * 0.4;'
-          - 1.20500 -> !lambda 'return id(tank_height) * 0.3;'
-          - 0.80333 -> !lambda 'return id(tank_height) * 0.2;'
-          - 0.40167 -> !lambda 'return id(tank_height) * 0.1;'
-          - 0.00000 -> !lambda 'return id(tank_height) * 0.0;'
+
+        lambda: |-
+          float voltage = id(tank_voltage).state;
+          float height = id(container_diameter);  // or whatever height calculation you need
+          if (voltage >= 4.01667) {
+            return height * 1.0;
+          } else if (voltage >= 3.61500) {
+            return height * 0.9;
+          } else if (voltage >= 3.21333) {
+            return height * 0.8;
+          } else if (voltage >= 2.81167) {
+            return height * 0.7;
+          } else if (voltage >= 2.41000) {
+            return height * 0.6;
+          } else if (voltage >= 2.00833) {
+            return height * 0.5;
+          } else if (voltage >= 1.60667) {
+            return height * 0.4;
+          } else if (voltage >= 1.20500) {
+            return height * 0.3;
+          } else if (voltage >= 0.80333) {
+            return height * 0.2;
+          } else if (voltage >= 0.40167) {
+            return height * 0.1;
+          } else {
+            return 0.0;
+          }
 
         # From https://www.sensorsone.com/measurement-to-linear-0-5v-converter/?iunit=cm&irdg=0.8452500672&ilo=0.469&ihi=4.016666&ounit=V&olo=0&ohi=5
       - delta : 0.001                  # Only send the result if the difference with the last sent result is higher than this
