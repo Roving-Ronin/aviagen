@@ -107,17 +107,17 @@ sensor:
       - lambda: |-
           float tank_height = id(tank_height);
           return {
-            4.01667f, tank_height,
-            3.61500f, tank_height * 0.9f,
-            3.21333f, tank_height * 0.8f,
-            2.81167f, tank_height * 0.7f,
-            2.41000f, tank_height * 0.6f,
-            2.00833f, tank_height * 0.5f,
-            1.60667f, tank_height * 0.4f,
-            1.20500f, tank_height * 0.3f,
-            0.80333f, tank_height * 0.2f,
-            0.40167f, tank_height * 0.1f,
-            0.00000f, 0.0f
+            4.01667, tank_height,
+            3.61500, tank_height * 0.9,
+            3.21333, tank_height * 0.8,
+            2.81167, tank_height * 0.7,
+            2.41000, tank_height * 0.6,
+            2.00833, tank_height * 0.5,
+            1.60667, tank_height * 0.4,
+            1.20500, tank_height * 0.3,
+            0.80333, tank_height * 0.2,
+            0.40167, tank_height * 0.1,
+            0.00000, 0.0
           };
       - calibrate_linear: !lambda |-
           auto values = id(tank_level).get_filter(0)->get_values();
