@@ -37,6 +37,7 @@ substitutions:
   rf_433mhz_receiver: "GPIO9"
 
 
+
 ########################## End of Substitutions #########################
 #
 # ESP Device Settings
@@ -112,32 +113,32 @@ logger:
 
 sensor:
 
-  - platform: adc
-    pin: 4
-    name: "Analog Port 4"
-    update_interval: 2s
-    unit_of_measurement: V
-    attenuation: 12db
-    filters:
-      - multiply: 5
+#  - platform: adc
+#    pin: 4
+#    name: "Analog Port 4"
+#    update_interval: 2s
+#    unit_of_measurement: V
+#    attenuation: 12db
+#    filters:
+#      - multiply: 5
 
-  - platform: adc
-    pin: 5
-    name: "Analog Port 3"
-    update_interval: 2s
-    unit_of_measurement: V
-    attenuation: 12db
-    filters:
-      - multiply: 5
+#  - platform: adc
+#    pin: 5
+#    name: "Analog Port 3"
+#    update_interval: 2s
+#    unit_of_measurement: V
+#    attenuation: 12db
+#    filters:
+#      - multiply: 5
 
-  - platform: adc
-    pin: 6
-    name: "Analog Port 2"
-    update_interval: 2s
-    unit_of_measurement: V
-    attenuation: 12db
-    filters:
-      - multiply: 5
+#  - platform: adc
+#    pin: 6
+#    name: "Analog Port 2"
+#    update_interval: 2s
+#    unit_of_measurement: V
+#    attenuation: 12db
+#    filters:
+#      - multiply: 5
 
 
 ##########################################################################
@@ -147,23 +148,23 @@ sensor:
 
 binary_sensor:
 
-  - platform: gpio
-    name: "1-wire #1"
-    pin: 
-      number: 8
-      inverted: true
+#  - platform: gpio
+#    name: "1-wire #1"
+#    pin: 
+#      number: 8
+#      inverted: true
 
-  - platform: gpio
-    name: "1-wire #2"
-    pin: 
-      number: 40
-      inverted: true
-
-  - platform: gpio
-    name: "S3 DL"
-    pin: 
-      number: 0
-      inverted: true
+#  - platform: gpio
+#    name: "1-wire #2"
+#    pin: 
+#      number: 40
+#      inverted: true
+#
+#  - platform: gpio
+#    name: "S3 DL"
+#    pin: 
+#      number: 0
+#      inverted: true
 
 #  - platform: gpio
 #    name: "S3 SDA"
