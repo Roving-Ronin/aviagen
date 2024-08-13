@@ -44,6 +44,11 @@ globals:
     restore_value: no
     initial_value: ${tank_radius}
 
+  - id: tank_height
+    type: float
+    restore_value: no
+    initial_value: ${inlet_height}
+
 
 #########################################################################
 #
@@ -98,11 +103,11 @@ sensor:
     icon: 'mdi:water-well'
     unit_of_measurement: 'cm'
     lambda: |-
-        return id(water_tank_voltage).state;
+        return id(tank_voltage).state;
     update_interval: 1s #the delta filter will ensure it only sends values when something changes. 
     filters:
       - calibrate_linear:
-          # Measured value of X volt maps to Y cm
+          # Measured value of X volt maps to Y cm. 241.0 (and preceding numbers) are based upon a inlet height of 241cm. i.e. 120.5 = 50% of that etc
           - 4.01667 -> 241.0   # 100%
           - 3.61500 -> 216.9   #  90%
           - 3.21333 -> 192.8   #  80%
@@ -141,12 +146,12 @@ sensor:
     id: "${tank_name}_tank_percent"
     icon: 'mdi:water-percent'
     unit_of_measurement: '%'
+    update_interval: 1s #the delta filter will ensure it only sends values when something changes.     
     lambda: |-
-        return id(tank_level).state / id(tank_height) * 100;
+        return id(tank_level).state / id(tank_height).state * 100;
     # divide by max water level height to get a percentage. Inlet height 2410mm / tank height 2485mm. Diameter 2380mm. 10,000L
     # H 2410mm x D 2380mm = 10,721.6305 L (Full).   2410mm = 23.56kPa / .24bar / 3.42psi / 176.75 mmHg
     # local gravity = 9.79697g ms2.  1,000L = 979.697kg
-    update_interval: 1s #the delta filter will ensure it only sends values when something changes. 
     filters:
       - delta : 0.1 #only send the result if the difference with the last sent result is higher than this
 
