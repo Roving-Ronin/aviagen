@@ -141,7 +141,6 @@ sensor:
     id: "${tank_name}_tank_percent"
     icon: 'mdi:water-percent'
     unit_of_measurement: '%'
-    update_interval: 1s #the delta filter will ensure it only sends values when something changes.     
     lambda: |-
         return id(tank_level).state / id(tank_height) * 100;
     # divide by max water level height to get a percentage. Inlet height 2410mm / tank height 2485mm. Diameter 2380mm. 10,000L
